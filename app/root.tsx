@@ -1,12 +1,57 @@
+import type { LoaderFunctionArgs, SerializeFrom } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 import {
-  Form,
+  isRouteErrorResponse,
   Links,
+  LiveReload,
   Meta,
+  Outlet,
   Scripts,
   ScrollRestoration,
-} from "@remix-run/react";
+  ShouldRevalidateFunction,
+  useLoaderData,
+  useMatches,
+  useRouteError,
+} from '@remix-run/react';
+import { useEffect } from 'react';
+
+import { createEmptyContact, getContacts } from '~/api/data';
+import appStylesHref from '~/app.css';
+import Layout from '~/components/Layout';
+
+export const shouldRevalidate: ShouldRevalidateFunction = ({
+  formMethod,
+  currentUrl,
+  nextUrl,
+}) =>
+  (formMethod && formMethod !== 'GET') ??
+  currentUrl.toString() !== nextUrl.toString();
+
+export async function action() {
+  const contact = await createEmptyContact();
+  return redirect(`/contacts/${contact.id}/edit`);
+}
+
+export function links() {
+  return [{ rel: 'stylesheet', href: appStylesHref }];
+}
+
+export const useRootLoaderData = () => {
+  const [root] = useMatches();
+  console.log(root);
+  return root?.data as SerializeFrom<typeof loader>;
+};
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const url = new URL(request.url);
+  const q = url.searchParams.get('q');
+  const contacts = await getContacts(q);
+  return json({ contacts, q });
+}
 
 export default function App() {
+  const data = useLoaderData<typeof loader>();
+
   return (
     <html lang="en">
       <head>
@@ -16,37 +61,45 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <div id="sidebar">
-          <h1>Remix Contacts</h1>
-          <div>
-            <Form id="search-form" role="search">
-              <input
-                id="q"
-                aria-label="Search contacts"
-                placeholder="Search"
-                type="search"
-                name="q"
-              />
-              <div id="search-spinner" aria-hidden hidden={true} />
-            </Form>
-            <Form method="post">
-              <button type="submit">New</button>
-            </Form>
-          </div>
-          <nav>
-            <ul>
-              <li>
-                <a href={`/contacts/1`}>Your Name</a>
-              </li>
-              <li>
-                <a href={`/contacts/2`}>Your Friend</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-
+        <Layout {...data}>
+          <Outlet />
+        </Layout>
         <ScrollRestoration />
         <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  const rootData = useRootLoaderData();
+
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <Layout {...rootData}>
+          <div className="error-page">
+            <h1>{isRouteErrorResponse(error) ? error.status : 500}</h1>
+            <p>
+              {isRouteErrorResponse(error)
+                ? error.data.message ?? error.data
+                : error instanceof Error
+                ? error.message
+                : 'An Unknown error ocurred'}
+            </p>
+          </div>
+        </Layout>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
       </body>
     </html>
   );
