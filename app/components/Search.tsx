@@ -1,19 +1,8 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
-import {
-  Form,
-  json,
-  useLoaderData,
-  useNavigation,
-  useSubmit,
-} from '@remix-run/react';
-
-export async function loader({ request }: LoaderFunctionArgs) {
-  const q = new URL(request.url).searchParams.get('q');
-  return json({ q });
-}
+import { Form, useNavigation, useSubmit } from '@remix-run/react';
+import { useRootLoaderData } from '~/root';
 
 export function SearchForm() {
-  const { q } = useLoaderData<typeof loader>();
+  const { q } = useRootLoaderData();
   const navigation = useNavigation();
   const searching =
     navigation.location &&

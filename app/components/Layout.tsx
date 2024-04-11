@@ -1,17 +1,11 @@
-import { useNavigation } from '@remix-run/react';
+import { Await } from '@remix-run/react';
 import { Suspense } from 'react';
 import Navbar from '~/components/Navbar';
 import { SearchForm } from '~/components/Search';
 
-type LayoutProps = {
-  children?: React.ReactNode;
-};
+type LayoutProps = { children?: React.ReactNode };
 
 export default function Layout({ children }: LayoutProps) {
-  const navigation = useNavigation();
-  const searching =
-    navigation.location &&
-    new URLSearchParams(navigation.location.search).has('q');
   return (
     <>
       <div id="sidebar">
@@ -19,14 +13,11 @@ export default function Layout({ children }: LayoutProps) {
         <SearchForm />
         <Navbar />
       </div>
-      <div
-        className={
-          navigation.state === 'loading' && !searching ? 'loading' : ''
-        }
-        id="detail"
-      >
-        <Suspense>{children}</Suspense>
-      </div>
+      <Suspense fallback={<>Loading...</>}>
+        <Await resolve={children}>
+          <div id="detail">{children}</div>
+        </Await>
+      </Suspense>
     </>
   );
 }

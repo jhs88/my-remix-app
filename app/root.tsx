@@ -1,5 +1,10 @@
-import type { LoaderFunctionArgs, SerializeFrom } from '@remix-run/node';
-import { json, redirect } from '@remix-run/node';
+import type {
+  LinksFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+  SerializeFrom,
+} from '@remix-run/node';
+import { defer, redirect } from '@remix-run/node';
 import {
   isRouteErrorResponse,
   Links,
@@ -8,37 +13,42 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  ShouldRevalidateFunction,
   useLoaderData,
   useMatches,
   useRouteError,
 } from '@remix-run/react';
-import { useEffect } from 'react';
 
 import { createEmptyContact, getContacts } from '~/api/data';
-import appStylesHref from '~/app.css';
+// import appStylesHref from '~/app.css';
 import Layout from '~/components/Layout';
 
-export const shouldRevalidate: ShouldRevalidateFunction = ({
-  formMethod,
-  currentUrl,
-  nextUrl,
-}) =>
-  (formMethod && formMethod !== 'GET') ??
-  currentUrl.toString() !== nextUrl.toString();
+export const meta: MetaFunction = () => [{ title: 'Remix Contacts' }];
+
+export const links: LinksFunction = () => [
+  // { rel: 'stylesheet', href: appStylesHref },
+  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+  {
+    rel: 'preconnect',
+    href: 'https://fonts.gstatic.com',
+    crossOrigin: undefined,
+  },
+  {
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
+  },
+  {
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+  },
+];
 
 export async function action() {
   const contact = await createEmptyContact();
   return redirect(`/contacts/${contact.id}/edit`);
 }
 
-export function links() {
-  return [{ rel: 'stylesheet', href: appStylesHref }];
-}
-
 export const useRootLoaderData = () => {
   const [root] = useMatches();
-  console.log(root);
   return root?.data as SerializeFrom<typeof loader>;
 };
 
@@ -46,7 +56,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const q = url.searchParams.get('q');
   const contacts = await getContacts(q);
-  return json({ contacts, q });
+  return defer({ contacts, q });
 }
 
 export default function App() {
@@ -66,7 +76,7 @@ export default function App() {
         </Layout>
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
+        {/* <LiveReload /> */}
       </body>
     </html>
   );
@@ -92,14 +102,14 @@ export function ErrorBoundary() {
               {isRouteErrorResponse(error)
                 ? error.data.message ?? error.data
                 : error instanceof Error
-                ? error.message
-                : 'An Unknown error ocurred'}
+                  ? error.message
+                  : 'An Unknown error ocurred'}
             </p>
           </div>
         </Layout>
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
+        {/* <LiveReload /> */}
       </body>
     </html>
   );
