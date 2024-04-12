@@ -8,7 +8,6 @@ import { defer, redirect } from '@remix-run/node';
 import {
   isRouteErrorResponse,
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -19,28 +18,18 @@ import {
 } from '@remix-run/react';
 
 import { createEmptyContact, getContacts } from '~/api/data';
-// import appStylesHref from '~/app.css';
-import Layout from '~/components/Layout';
+import Content from '~/components/Layout';
+import { getMuiLinks } from '~/mui/getMuiLinks';
+import { MuiMeta } from '~/mui/MuiMeta';
+import theme from '~/mui/theme';
+import { MuiDocument } from './mui/MuiDocument';
 
-export const meta: MetaFunction = () => [{ title: 'Remix Contacts' }];
-
-export const links: LinksFunction = () => [
-  // { rel: 'stylesheet', href: appStylesHref },
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  {
-    rel: 'preconnect',
-    href: 'https://fonts.gstatic.com',
-    crossOrigin: undefined,
-  },
-  {
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
-  },
-  {
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
-  },
+export const meta: MetaFunction = () => [
+  { name: 'theme-color', content: theme.palette.primary.main },
+  { title: 'Remix Contacts' },
 ];
+
+export const links: LinksFunction = () => [...getMuiLinks()];
 
 export async function action() {
   const contact = await createEmptyContact();
@@ -59,26 +48,34 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return defer({ contacts, q });
 }
 
-export default function App() {
-  const data = useLoaderData<typeof loader>();
-
+export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
+        <MuiMeta />
         <Links />
       </head>
       <body>
-        <Layout {...data}>
-          <Outlet />
-        </Layout>
+        {children}
         <ScrollRestoration />
         <Scripts />
-        {/* <LiveReload /> */}
       </body>
     </html>
+  );
+}
+
+export default function App() {
+  const data = useLoaderData<typeof loader>();
+
+  return (
+    <MuiDocument>
+      <Content {...data}>
+        <Outlet />
+      </Content>
+    </MuiDocument>
   );
 }
 
@@ -87,30 +84,21 @@ export function ErrorBoundary() {
   const rootData = useRootLoaderData();
 
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <Layout {...rootData}>
-          <div className="error-page">
-            <h1>{isRouteErrorResponse(error) ? error.status : 500}</h1>
-            <p>
-              {isRouteErrorResponse(error)
-                ? error.data.message ?? error.data
-                : error instanceof Error
-                  ? error.message
-                  : 'An Unknown error ocurred'}
-            </p>
-          </div>
-        </Layout>
-        <ScrollRestoration />
-        <Scripts />
-        {/* <LiveReload /> */}
-      </body>
-    </html>
+    <MuiDocument>
+      <Content {...rootData}>
+        <div className="error-page">
+          <h1>{isRouteErrorResponse(error) ? error.status : 500}</h1>
+          <p>
+            {isRouteErrorResponse(error)
+              ? error.data.message ?? error.data
+              : error instanceof Error
+                ? error.message
+                : 'An Unknown error ocurred'}
+          </p>
+        </div>
+      </Content>
+      <ScrollRestoration />
+      <Scripts />
+    </MuiDocument>
   );
 }

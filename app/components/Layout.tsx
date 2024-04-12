@@ -1,23 +1,32 @@
-import { Await } from '@remix-run/react';
-import { Suspense } from 'react';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import Navbar from '~/components/Navbar';
 import { SearchForm } from '~/components/Search';
 
-type LayoutProps = { children?: React.ReactNode };
-
-export default function Layout({ children }: LayoutProps) {
+export default function Content({ children }: { children?: React.ReactNode }) {
   return (
-    <>
-      <div id="sidebar">
-        <h1>Remix Contacts</h1>
-        <SearchForm />
-        <Navbar />
-      </div>
-      <Suspense fallback={<>Loading...</>}>
-        <Await resolve={children}>
-          <div id="detail">{children}</div>
-        </Await>
-      </Suspense>
-    </>
+    <Container>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={3}>
+          <SideBar />
+        </Grid>
+        <Grid item xs={12} md={9}>
+          <Detail>{children}</Detail>
+        </Grid>
+      </Grid>
+    </Container>
   );
+}
+
+function SideBar() {
+  return (
+    <Box>
+      <Typography variant="h3">Remix Contacts</Typography>
+      <SearchForm />
+      <Navbar />
+    </Box>
+  );
+}
+
+function Detail({ children }: { children?: React.ReactNode }) {
+  return <Box>{children}</Box>;
 }
