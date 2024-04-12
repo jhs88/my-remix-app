@@ -1,12 +1,10 @@
 import type {
   LinksFunction,
   LoaderFunctionArgs,
-  MetaFunction,
   SerializeFrom,
 } from '@remix-run/node';
 import { defer, redirect } from '@remix-run/node';
 import {
-  isRouteErrorResponse,
   Links,
   Meta,
   Outlet,
@@ -16,18 +14,12 @@ import {
   useMatches,
   useRouteError,
 } from '@remix-run/react';
-
 import { createEmptyContact, getContacts } from '~/api/data';
-import Content from '~/components/Layout';
+import Content from '~/components/Content';
+import { ErrorFallback } from '~/components/ErrorFallback';
 import { getMuiLinks } from '~/mui/getMuiLinks';
+import { MuiDocument } from '~/mui/MuiDocument';
 import { MuiMeta } from '~/mui/MuiMeta';
-import theme from '~/mui/theme';
-import { MuiDocument } from './mui/MuiDocument';
-
-export const meta: MetaFunction = () => [
-  { name: 'theme-color', content: theme.palette.primary.main },
-  { title: 'Remix Contacts' },
-];
 
 export const links: LinksFunction = () => [...getMuiLinks()];
 
@@ -71,34 +63,27 @@ export default function App() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <MuiDocument>
-      <Content {...data}>
-        <Outlet />
-      </Content>
-    </MuiDocument>
+    <>
+      <MuiDocument>
+        <Content {...data}>
+          <Outlet />
+        </Content>
+      </MuiDocument>
+    </>
   );
 }
 
 export function ErrorBoundary() {
   const error = useRouteError();
-  const rootData = useRootLoaderData();
+  const data = useRootLoaderData();
 
   return (
-    <MuiDocument>
-      <Content {...rootData}>
-        <div className="error-page">
-          <h1>{isRouteErrorResponse(error) ? error.status : 500}</h1>
-          <p>
-            {isRouteErrorResponse(error)
-              ? error.data.message ?? error.data
-              : error instanceof Error
-                ? error.message
-                : 'An Unknown error ocurred'}
-          </p>
-        </div>
-      </Content>
-      <ScrollRestoration />
-      <Scripts />
-    </MuiDocument>
+    <>
+      <MuiDocument>
+        <Content {...data}>
+          <ErrorFallback {...{ error }} />
+        </Content>
+      </MuiDocument>
+    </>
   );
 }

@@ -1,13 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  ExpandMore as ExpandMoreIcon,
-  Favorite as FavoriteIcon,
-  MoreVert as MoreVertIcon,
-  Share as ShareIcon,
-  UploadFile as UploadFileIcon,
-} from '@mui/icons-material';
-import type { IconButtonProps } from '@mui/material';
+
 import {
   Accordion,
   AccordionActions,
@@ -26,6 +19,7 @@ import {
   FormControl,
   Grid,
   IconButton,
+  IconButtonProps,
   InputLabel,
   MenuItem,
   Paper,
@@ -34,30 +28,38 @@ import {
   TextField,
   Typography,
   styled,
-} from '@mui/material';
-import { Link } from '@remix-run/react';
-import { useState } from 'react';
+} from "@mui/material";
+import { Link } from "@remix-run/react";
+import {
+  Favorite as FavoriteIcon,
+  Share as ShareIcon,
+  ExpandMore as ExpandMoreIcon,
+  MoreVert as MoreVertIcon,
+  UploadFile as UploadFileIcon,
+} from "@mui/icons-material";
+
+import { useState } from "react";
 
 function AddressForm() {
-  const [age, setAge] = useState('');
+  const [age, setAge] = useState("");
 
   const handleChange = (event: any) => {
     setAge(event.target.value);
   };
 
   const categories = [
-    'science',
-    'sports',
-    'business',
-    'politics',
-    'entertainment',
-    'technology',
-    'world',
-    'all',
+    "science",
+    "sports",
+    "business",
+    "politics",
+    "entertainment",
+    "technology",
+    "world",
+    "all",
   ];
   return (
     <>
-      <Paper elevation={3} sx={{ marginRight: '15%', marginLeft: '15%' }}>
+      <Paper elevation={3} sx={{ marginRight: "15%", marginLeft: "15%" }}>
         <Box sx={{ padding: 5 }}>
           <Typography variant="h6" gutterBottom sx={{ paddingBottom: 5 }}>
             Sample Form
@@ -66,8 +68,8 @@ function AddressForm() {
             <Grid item xs={12} sm={2}>
               <InputLabel
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
+                  display: "flex",
+                  justifyContent: "center",
                   fontWeight: 700,
                 }}
               >
@@ -89,8 +91,8 @@ function AddressForm() {
             <Grid item xs={12} sm={2}>
               <InputLabel
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
+                  display: "flex",
+                  justifyContent: "center",
                   fontWeight: 700,
                 }}
               >
@@ -109,8 +111,8 @@ function AddressForm() {
             <Grid item xs={12} sm={2}>
               <InputLabel
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
+                  display: "flex",
+                  justifyContent: "center",
                   fontWeight: 700,
                 }}
               >
@@ -132,8 +134,8 @@ function AddressForm() {
             <Grid item xs={12} sm={2}>
               <InputLabel
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
+                  display: "flex",
+                  justifyContent: "center",
                   fontWeight: 700,
                 }}
               >
@@ -161,8 +163,8 @@ function AddressForm() {
             <Grid item xs={12} sm={2}>
               <InputLabel
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
+                  display: "flex",
+                  justifyContent: "center",
                   fontWeight: 700,
                 }}
               >
@@ -184,8 +186,8 @@ function AddressForm() {
             <Grid item xs={12} sm={2}>
               <InputLabel
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
+                  display: "flex",
+                  justifyContent: "center",
                   fontWeight: 700,
                 }}
               >
@@ -268,9 +270,9 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
     duration: theme.transitions.duration.shortest,
   }),
 }));
@@ -359,10 +361,10 @@ function RecipeReviewCard() {
 }
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: 'center',
+  textAlign: "center",
   color: theme.palette.text.secondary,
 }));
 

@@ -1,10 +1,11 @@
-import createCache from '@emotion/cache';
-import { CacheProvider } from '@emotion/react';
-import { ThemeProvider } from '@mui/material';
-import theme from '~/mui/theme';
+import { CacheProvider } from "@emotion/react";
+
+import { ThemeProvider } from "@mui/material";
+import theme from "./theme";
+import createCache from "@emotion/cache";
 
 function createEmotionCache() {
-  return createCache({ key: 'css' });
+  return createCache({ key: "css" });
 }
 
 export function MuiProvider({ children }: { children: React.ReactNode }) {

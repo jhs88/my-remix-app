@@ -1,10 +1,10 @@
 import { NavLink } from '@remix-run/react';
-import { ContactRecord } from '~/api/data';
+import type { ContactRecord } from '~/api/data';
 import { useRootLoaderData } from '~/root';
 
-type NavbarProps = {
+interface NavbarProps {
   contacts: ContactRecord[];
-};
+}
 
 export default function Navbar() {
   const { contacts }: NavbarProps = useRootLoaderData();
