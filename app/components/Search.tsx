@@ -1,12 +1,12 @@
-import { Form, useNavigation, useSubmit } from '@remix-run/react';
-import { useRootLoaderData } from '~/root';
+import { Form, useNavigation, useSubmit } from "@remix-run/react";
+import { useRootLoaderData } from "~/root";
 
 export function SearchForm() {
   const { q } = useRootLoaderData();
   const navigation = useNavigation();
   const searching =
     navigation.location &&
-    new URLSearchParams(navigation.location.search).has('q');
+    new URLSearchParams(navigation.location.search).has("q");
   const submit = useSubmit();
 
   return (
@@ -21,8 +21,8 @@ export function SearchForm() {
       >
         <input
           aria-label="Search contacts"
-          className={searching ? 'loading' : ''}
-          defaultValue={q ?? ''}
+          className={searching ? "loading" : ""}
+          defaultValue={q ?? ""}
           id="q"
           name="q"
           placeholder="Search"

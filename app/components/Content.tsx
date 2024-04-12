@@ -1,6 +1,6 @@
-import { Box, Container, Grid, Typography } from '@mui/material';
-import Navbar from '~/components/Navbar';
-import { SearchForm } from '~/components/Search';
+import { Box, Container, Grid, Typography } from "@mui/material";
+import Navbar from "~/components/Navbar";
+import { SearchForm } from "~/components/Search";
 
 export default function Content({ children }: { children?: React.ReactNode }) {
   return (

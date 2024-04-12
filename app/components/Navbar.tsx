@@ -1,6 +1,6 @@
-import { NavLink } from '@remix-run/react';
-import type { ContactRecord } from '~/api/data';
-import { useRootLoaderData } from '~/root';
+import { NavLink } from "@remix-run/react";
+import type { ContactRecord } from "~/api/data";
+import { useRootLoaderData } from "~/root";
 
 interface NavbarProps {
   contacts: ContactRecord[];
@@ -16,7 +16,7 @@ export default function Navbar() {
             <li key={contact.id}>
               <NavLink
                 className={({ isActive, isPending }) =>
-                  isActive ? 'active' : isPending ? 'pending' : ''
+                  isActive ? "active" : isPending ? "pending" : ""
                 }
                 to={`contacts/${contact.id}`}
               >
@@ -26,7 +26,7 @@ export default function Navbar() {
                   </>
                 ) : (
                   <i>No Name</i>
-                )}{' '}
+                )}{" "}
                 {contact.favorite ? <span>★</span> : null}
               </NavLink>
             </li>

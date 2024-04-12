@@ -1,6 +1,6 @@
-import { Box, Stack, Typography } from '@mui/material';
-import type { ErrorResponse } from '@remix-run/react';
-import { isRouteErrorResponse } from '@remix-run/react';
+import { Box, Stack, Typography } from "@mui/material";
+import type { ErrorResponse } from "@remix-run/react";
+import { isRouteErrorResponse } from "@remix-run/react";
 
 interface ErrorFallbackProps {
   error: ErrorResponse | Error | unknown;
@@ -17,8 +17,8 @@ export function ErrorFallback({ error }: ErrorFallbackProps) {
           {isRouteErrorResponse(error)
             ? error.data.message ?? error.data
             : error instanceof Error
-            ? error.message
-            : 'An Unknown error ocurred'}
+              ? error.message
+              : "An Unknown error ocurred"}
         </Typography>
       </Stack>
     </Box>
