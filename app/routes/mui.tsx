@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
+import type { IconButtonProps } from "@mui/material";
 import {
   Accordion,
   AccordionActions,
@@ -19,8 +19,8 @@ import {
   FormControl,
   Grid,
   IconButton,
-  IconButtonProps,
   InputLabel,
+  Link,
   MenuItem,
   Paper,
   Select,
@@ -29,7 +29,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { Link } from "@remix-run/react";
+import { Link as RouterLink } from "@remix-run/react";
 import {
   Favorite as FavoriteIcon,
   Share as ShareIcon,
@@ -39,6 +39,7 @@ import {
 } from "@mui/icons-material";
 
 import { useState } from "react";
+import FlipCard, { FrontCard, BackCard } from "~/components/FlipCard";
 
 function AddressForm() {
   const [age, setAge] = useState("");
@@ -371,7 +372,9 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Mui() {
   return (
     <Container fixed>
-      <h1>Welcome to Remix &lt;&gt; Mui</h1>
+      <Typography variant="h2" textAlign="center">
+        Welcome to Remix &lt;&gt; Mui
+      </Typography>
       <Stack spacing={2}>
         <Item>
           <AddressForm />
@@ -383,7 +386,10 @@ export default function Mui() {
           <RecipeReviewCard />
         </Item>
       </Stack>
-      <Link to="/">Go back to home</Link>
+      <Link component={RouterLink} variant="h3" to="/">
+        Go back to home
+      </Link>
+      <FlipCard FrontCard={<FrontCard />} BackCard={<BackCard />} />
     </Container>
   );
 }

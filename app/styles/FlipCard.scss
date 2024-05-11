@@ -1,0 +1,60 @@
+$card-transition-time: 0.5s;
+
+.flip-card {
+  position: relative;
+
+  .flip-card__wrapper {
+    transform-style: preserve-3d;
+    animation: rotate-inverse $card-transition-time linear both;
+
+    .flip-card__side {
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+
+      &.flip-card__side--back {
+        transform: rotateY(180deg);
+      }
+
+      &.is-active {
+        position: static;
+      }
+    }
+
+  }
+  &.is-switched {
+    .flip-card__wrapper {
+      animation: rotate $card-transition-time linear both;
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateY(0);
+  }
+
+  70% {
+    transform: rotateY(200deg);
+  }
+
+  100% {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes rotate-inverse {
+  0% {
+    transform: rotateY(180deg);
+  }
+
+  70% {
+    transform: rotateY(-20deg);
+  }
+
+  100% {
+    transform: rotateY(0);
+  }
+}
