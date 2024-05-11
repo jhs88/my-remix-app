@@ -1,42 +1,40 @@
-import { NavLink } from "@remix-run/react";
-import type { ContactRecord } from "~/api/data";
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import { NavLink, useNavigation } from "@remix-run/react";
 import { useRootLoaderData } from "~/root";
-
-interface NavbarProps {
-  contacts: ContactRecord[];
-}
 
 export default function Navbar() {
   const { contacts }: NavbarProps = useRootLoaderData();
+  const navigation = useNavigation();
+  const searching =
+    navigation.location &&
+    new URLSearchParams(navigation.location.search).has("q");
+
   return (
-    <nav>
+    <List id="sidebar" hidden={searching}>
       {contacts.length ? (
-        <ul>
-          {contacts.map((contact) => (
-            <li key={contact.id}>
-              <NavLink
-                className={({ isActive, isPending }) =>
-                  isActive ? "active" : isPending ? "pending" : ""
-                }
-                to={`contacts/${contact.id}`}
-              >
-                {contact.first || contact.last ? (
-                  <>
-                    {contact.first} {contact.last}
-                  </>
-                ) : (
-                  <i>No Name</i>
-                )}{" "}
-                {contact.favorite ? <span>★</span> : null}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+        contacts.map((contact) => (
+          <ListItemButton
+            key={contact.id}
+            component={NavLink}
+            to={`contacts/${contact.id}`}
+          >
+            <ListItemText>
+              {contact.first ?? ""} {contact.last ?? ""}
+            </ListItemText>
+            {contact.favorite && <Typography variant="h5">★</Typography>}
+          </ListItemButton>
+        ))
       ) : (
-        <p>
-          <i>No contacts</i>
-        </p>
+        <ListItem>
+          <ListItemText>No contacts</ListItemText>
+        </ListItem>
       )}
-    </nav>
+    </List>
   );
 }

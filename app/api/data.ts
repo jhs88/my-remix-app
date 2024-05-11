@@ -7,21 +7,6 @@ import { matchSorter } from 'match-sorter';
 import sortBy from 'sort-by';
 import invariant from 'tiny-invariant';
 
-type ContactMutation = {
-  id?: string;
-  first?: string;
-  last?: string;
-  avatar?: string;
-  twitter?: string;
-  notes?: string;
-  favorite?: boolean;
-};
-
-export type ContactRecord = ContactMutation & {
-  id: string;
-  createdAt: string;
-};
-
 ////////////////////////////////////////////////////////////////////////////////
 // This is just a fake DB table. In a real app you'd be talking to a real db or
 // fetching from an existing API.
@@ -63,7 +48,7 @@ const fakeContacts = {
 ////////////////////////////////////////////////////////////////////////////////
 // Handful of helper functions to be called from route loaders and actions
 export async function getContacts(query?: string | null) {
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   let contacts = await fakeContacts.getAll();
   if (query) {
     contacts = matchSorter(contacts, query, {

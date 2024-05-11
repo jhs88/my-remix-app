@@ -1,4 +1,11 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  Link as MuiLink,
+} from "@mui/material";
+import { Link } from "@remix-run/react";
 import Navbar from "~/components/Navbar";
 import { SearchForm } from "~/components/Search";
 
@@ -6,11 +13,11 @@ export default function Content({ children }: { children?: React.ReactNode }) {
   return (
     <Container>
       <Grid container spacing={4}>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={4}>
           <SideBar />
         </Grid>
-        <Grid item xs={12} md={9}>
-          <Detail>{children}</Detail>
+        <Grid item justifyContent="center" alignItems="center" xs={12} md={8}>
+          {children}
         </Grid>
       </Grid>
     </Container>
@@ -19,14 +26,14 @@ export default function Content({ children }: { children?: React.ReactNode }) {
 
 function SideBar() {
   return (
-    <Box>
-      <Typography variant="h3">Remix Contacts</Typography>
+    <Box component="nav" justifyContent="center">
+      <MuiLink component={Link} to="/">
+        <Typography variant="h3" gutterBottom>
+          Remix Contacts
+        </Typography>
+      </MuiLink>
       <SearchForm />
       <Navbar />
     </Box>
   );
-}
-
-function Detail({ children }: { children?: React.ReactNode }) {
-  return <Box>{children}</Box>;
 }
