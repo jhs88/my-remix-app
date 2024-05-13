@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import { NavLink, useNavigation } from "@remix-run/react";
+
 import { useRootLoaderData } from "~/root";
 
 export default function Navbar() {
