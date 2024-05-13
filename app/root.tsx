@@ -17,7 +17,7 @@ import {
 import { createEmptyContact, getContacts } from "~/api/data";
 import Content from "~/components/Content";
 import { ErrorFallback } from "~/components/ErrorFallback";
-import { getMuiLinks, MuiDocument, MuiMeta } from "~/mui";
+import { getMuiLinks, MuiDocument, MuiMeta } from "~/theme";
 
 export const links: LinksFunction = () => [...getMuiLinks()];
 
