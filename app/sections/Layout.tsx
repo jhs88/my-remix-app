@@ -6,10 +6,11 @@ import {
   Link as MuiLink,
 } from "@mui/material";
 import { Link } from "@remix-run/react";
-import Navbar from "~/components/Navbar";
-import { SearchForm } from "~/components/Search";
 
-export default function Content({ children }: { children?: React.ReactNode }) {
+import Navbar from "~/sections/Navbar";
+import { SearchForm } from "~/sections/Search";
+
+export default function Layout({ children }: { children?: React.ReactNode }) {
   return (
     <Container>
       <Grid container spacing={4}>

@@ -14,8 +14,9 @@ import {
   useMatches,
   useRouteError,
 } from "@remix-run/react";
+
 import { createEmptyContact, getContacts } from "~/api/data";
-import Content from "~/components/Content";
+import Content from "~/sections/Layout";
 import { ErrorFallback } from "~/components/ErrorFallback";
 import { getMuiLinks, MuiDocument, MuiMeta } from "~/theme";
 

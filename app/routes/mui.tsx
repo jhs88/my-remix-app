@@ -1,45 +1,43 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { IconButtonProps } from "@mui/material";
 import {
-  Accordion,
-  AccordionActions,
-  AccordionDetails,
-  AccordionSummary,
-  Avatar,
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Collapse,
-  Container,
-  FormControl,
-  Grid,
-  IconButton,
-  InputLabel,
-  Link,
-  MenuItem,
-  Paper,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-  styled,
-} from "@mui/material";
-import { Link as RouterLink } from "@remix-run/react";
-import {
-  Favorite as FavoriteIcon,
-  Share as ShareIcon,
   ExpandMore as ExpandMoreIcon,
+  Favorite as FavoriteIcon,
   MoreVert as MoreVertIcon,
+  Share as ShareIcon,
   UploadFile as UploadFileIcon,
 } from "@mui/icons-material";
-
+import type { IconButtonProps } from "@mui/material";
+import Accordion from "@mui/material/Accordion";
+import AccordionActions from "@mui/material/AccordionActions";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import Collapse from "@mui/material/Collapse";
+import Container from "@mui/material/Container";
+import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import Link from "@mui/material/Link";
+import MenuItem from "@mui/material/MenuItem";
+import Paper from "@mui/material/Paper";
+import Select from "@mui/material/Select";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
+import { Link as RouterLink } from "@remix-run/react";
 import { useState } from "react";
-import FlipCard, { FrontCard, BackCard } from "~/components/FlipCard";
+import Carousel from "~/components/Carousel";
+import FlipCard, { BackCard, FrontCard } from "~/components/FlipCard";
 
 function AddressForm() {
   const [age, setAge] = useState("");
@@ -385,11 +383,30 @@ export default function Mui() {
         <Item>
           <RecipeReviewCard />
         </Item>
+        <FlipCard
+          FrontCard={
+            <FrontCard>
+              <Carousel>
+                <div>j</div>
+                <div>k</div>
+                <div>l</div>
+              </Carousel>
+            </FrontCard>
+          }
+          BackCard={
+            <BackCard>
+              <Carousel>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+              </Carousel>
+            </BackCard>
+          }
+        />
+        <Link component={RouterLink} variant="h3" to="/">
+          Go back to home
+        </Link>
       </Stack>
-      <Link component={RouterLink} variant="h3" to="/">
-        Go back to home
-      </Link>
-      <FlipCard FrontCard={<FrontCard />} BackCard={<BackCard />} />
     </Container>
   );
 }
