@@ -7,9 +7,11 @@ import tsconfigPaths from "vite-tsconfig-paths";
 installGlobals();
 
 export default defineConfig({
-  ssr: {
-    noExternal: ["@mui/*"],
-  },
+  ...(process.env.NODE_ENV === "production" && {
+    ssr: {
+      noExternal: ["@mui/*"],
+    },
+  }),
   plugins: [
     remixDevTools(),
     remix({
