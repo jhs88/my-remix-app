@@ -7,8 +7,8 @@ import {
 } from "@mui/material";
 import { Link } from "@remix-run/react";
 
-import Navbar from "~/sections/Navbar";
-import { SearchForm } from "~/sections/Search";
+import Navbar from "./Navbar";
+import SearchForm from "./Search";
 
 export default function Layout({ children }: { children?: React.ReactNode }) {
   return (
