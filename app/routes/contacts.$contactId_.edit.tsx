@@ -2,8 +2,8 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
 import { defer, redirect } from "@remix-run/node";
 import { Form, useLoaderData, useNavigate } from "@remix-run/react";
 import invariant from "tiny-invariant";
-
 import { Button, Grid, InputLabel, Stack, TextField } from "@mui/material";
+
 import { getContact, updateContact } from "~/api/data";
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {

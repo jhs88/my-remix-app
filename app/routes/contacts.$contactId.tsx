@@ -1,15 +1,7 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Link,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Link, Stack, Typography } from "@mui/material";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Await, Form, useFetcher, useLoaderData } from "@remix-run/react";
-import { Suspense } from "react";
+import { Form, useFetcher, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
 import { getContact, updateContact } from "~/api/data";
@@ -36,68 +28,57 @@ export default function Contact() {
   const { contact } = useLoaderData<typeof loader>();
 
   return (
-    <Suspense fallback={<CircularProgress variant="indeterminate" />}>
-      <Await resolve={contact}>
-        <Stack
-          id="contact"
-          p="1rem"
-          justifyContent="center"
-          alignItems="center"
+    <Stack id="contact" p="1rem" justifyContent="center" alignItems="center">
+      <Box
+        component="img"
+        alt={`${contact.first} ${contact.last} avatar`}
+        key={contact.avatar}
+        src={contact.avatar}
+        width="50%"
+        borderRadius="50%"
+      />
+      <Stack direction="row" alignItems="center" spacing={4}>
+        <Typography variant="h3" gutterBottom>
+          {contact.first || contact.last
+            ? `${contact.first} ${contact.last}`
+            : "No Name"}
+        </Typography>
+        <Favorite contact={contact} />
+      </Stack>
+      {contact.twitter && (
+        <Link
+          variant="h4"
+          href={`https://twitter.com/${contact.twitter}`}
+          gutterBottom
         >
-          <Box
-            component="img"
-            alt={`${contact.first} ${contact.last} avatar`}
-            key={contact.avatar}
-            src={contact.avatar}
-            width="50%"
-            borderRadius="50%"
-          />
-          <Stack direction="row" alignItems="center" spacing={4}>
-            <Typography variant="h3" gutterBottom>
-              {contact.first || contact.last
-                ? `${contact.first} ${contact.last}`
-                : "No Name"}
-            </Typography>
-            <Favorite contact={contact} />
-          </Stack>
-          {contact.twitter && (
-            <Link
-              variant="h4"
-              href={`https://twitter.com/${contact.twitter}`}
-              gutterBottom
-            >
-              {contact.twitter}
-            </Link>
-          )}
-          {contact.notes && (
-            <Typography gutterBottom>{contact.notes}</Typography>
-          )}
-          <Stack direction="row" mt="2rem" spacing={2}>
-            <Form action="edit">
-              <Button variant="outlined" type="submit">
-                Edit
-              </Button>
-            </Form>
-            <Form
-              action="destroy"
-              method="post"
-              onSubmit={(event) => {
-                const response = confirm(
-                  "Please confirm you want to delete this record.",
-                );
-                if (!response) {
-                  event.preventDefault();
-                }
-              }}
-            >
-              <Button variant="outlined" type="submit">
-                Delete
-              </Button>
-            </Form>
-          </Stack>
-        </Stack>
-      </Await>
-    </Suspense>
+          {contact.twitter}
+        </Link>
+      )}
+      {contact.notes && <Typography gutterBottom>{contact.notes}</Typography>}
+      <Stack direction="row" mt="2rem" spacing={2}>
+        <Form action="edit">
+          <Button variant="outlined" type="submit">
+            Edit
+          </Button>
+        </Form>
+        <Form
+          action="destroy"
+          method="post"
+          onSubmit={(event) => {
+            const response = confirm(
+              "Please confirm you want to delete this record.",
+            );
+            if (!response) {
+              event.preventDefault();
+            }
+          }}
+        >
+          <Button variant="outlined" type="submit">
+            Delete
+          </Button>
+        </Form>
+      </Stack>
+    </Stack>
   );
 }
 

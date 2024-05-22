@@ -16,8 +16,8 @@ import {
 } from "@remix-run/react";
 
 import { createEmptyContact, getContacts } from "~/api/data";
-import Content from "~/sections/Layout";
 import { ErrorFallback } from "~/components/ErrorFallback";
+import Content from "~/sections/Layout";
 import { getMuiLinks, MuiDocument, MuiMeta } from "~/theme";
 
 export const links: LinksFunction = () => [...getMuiLinks()];
