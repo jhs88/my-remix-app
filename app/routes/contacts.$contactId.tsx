@@ -1,6 +1,5 @@
 import { Box, Button, Link, Stack, Typography } from "@mui/material";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import { Form, useFetcher, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
@@ -21,7 +20,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   // const test = delay(2000);
   const contact = await getContact(params.contactId);
   if (!contact) throw new Response("Not Found", { status: 404 });
-  return json({ contact });
+  return { contact };
 }
 
 export default function Contact() {

@@ -1,5 +1,5 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
-import { defer, redirect } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { Form, useLoaderData, useNavigate } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { Button, Grid, InputLabel, Stack, TextField } from "@mui/material";
@@ -18,7 +18,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   invariant(params.contactId, "Missing contactId param");
   const contact = await getContact(params.contactId);
   if (!contact) throw new Response("Not Found", { status: 404 });
-  return defer({ contact });
+  return { contact };
 };
 
 export default function EditContact() {
