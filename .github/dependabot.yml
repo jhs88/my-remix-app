@@ -9,6 +9,9 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "monthly"
+    open-pr-limit: 2
+    assignees:
+      - "dependabot"
     allow:
       - dependency-type: "all"
       
