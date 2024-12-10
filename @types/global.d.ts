@@ -20,3 +20,5 @@ type OfferProps = {
   description?: string;
   eligibleEquipments?: string;
 };
+
+type SerializeFrom<T> = ReturnType<typeof useLoaderData<T>>;

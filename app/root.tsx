@@ -1,9 +1,8 @@
 import type {
   LinksFunction,
   LoaderFunctionArgs,
-  SerializeFrom,
 } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import {
   Links,
   Meta,
@@ -36,7 +35,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
   const contacts = await getContacts(q);
-  return json({ contacts, q });
+  return { contacts, q };
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
