@@ -1,5 +1,5 @@
 import { Box, Link as MuiLink, Typography } from "@mui/material";
-import { Link } from "@remix-run/react";
+import { Link } from "react-router";
 
 import SearchForm from "./Search";
 import Navbar from "./Navbar";
@@ -14,7 +14,7 @@ export default function SideBar() {
     >
       <MuiLink component={Link} to="/">
         <Typography variant="h3" gutterBottom>
-          Remix Contacts
+          React Router Contacts
         </Typography>
       </MuiLink>
       <SearchForm />

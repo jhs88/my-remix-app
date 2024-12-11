@@ -5,7 +5,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { NavLink, useNavigation } from "@remix-run/react";
+import { NavLink, useNavigation } from "react-router";
 
 import { useRootLoaderData } from "~/root";
 

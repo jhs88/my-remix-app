@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { isRouteErrorResponse } from "@remix-run/react";
+import { isRouteErrorResponse } from "react-router";
 
 export function ErrorFallback({ error }: ErrorFallbackProps) {
   return (

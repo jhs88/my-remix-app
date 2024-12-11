@@ -1,6 +1,6 @@
 import { Box, Button, Link, Stack, Typography } from "@mui/material";
-import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { Form, useFetcher, useLoaderData } from "@remix-run/react";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
+import { Form, useFetcher, useLoaderData } from "react-router";
 import invariant from "tiny-invariant";
 
 import { getContact, updateContact } from "~/api/data";

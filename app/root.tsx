@@ -1,5 +1,5 @@
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
+import type { LinksFunction, LoaderFunctionArgs } from "react-router";
+import { redirect } from "react-router";
 import {
   Links,
   Meta,
@@ -9,7 +9,7 @@ import {
   useLoaderData,
   useMatches,
   useRouteError,
-} from "@remix-run/react";
+} from "react-router";
 
 import { createEmptyContact, getContacts } from "~/api/data";
 import { ErrorFallback } from "~/components/ErrorFallback";
