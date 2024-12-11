@@ -1,10 +1,10 @@
-Check [This PR](https://github.com/mahmoudmoravej/remix-mui/pull/1) To see what changes you need to integrate MUI in your Remix app.
+Check [This PR](https://github.com/mahmoudmoravej/react-router-mui/pull/1) To see what changes you need to integrate MUI in your react-router app.
 
 ---
 
-# Welcome to Remix + Vite!
+# Welcome to react-router + Vite!
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/future/vite) for details on supported features.
+📖 See the [react-router docs](https://react-router.run/docs) and the [react-router Vite docs](https://react-router.run/docs/en/main/future/vite) for details on supported features.
 
 ## Development
 
@@ -32,7 +32,7 @@ Now you'll need to pick a host to deploy it to.
 
 ### DIY
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
+If you're familiar with deploying Node applications, the built-in react-router app server is production-ready.
 
 Make sure to deploy the output of `npm run build`
 
