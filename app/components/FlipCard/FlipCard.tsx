@@ -32,7 +32,9 @@ export default function FlipCard({
   return (
     <Box
       className={`flip-card${switched ? " is-switched" : ""}`}
-      width={width ?? "100%"}
+      sx={{
+        width: width ?? "100%",
+      }}
     >
       <Box className={`flip-card__wrapper${className ? ` ${className}` : ""}`}>
         <Card className={`flip-card__side${!switched ? " is-active" : ""}`}>

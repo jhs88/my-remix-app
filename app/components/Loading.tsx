@@ -44,19 +44,34 @@ function SkeleCard() {
 /** Renders a popup loader component. */
 export function PopupLoader() {
   return (
-    <Stack alignItems="center" justifyContent="center" mt="5em" mb="5em">
+    <Stack
+      sx={{
+        alignItems: "center",
+        justifyContent: "center",
+        mt: "5em",
+        mb: "5em",
+      }}
+    >
       <Card variant="outlined">
         <CardContent>
           <Box
-            alignItems="center"
-            justifyContent="center"
-            display="flex"
-            flexDirection="column"
-            margin="auto"
-            maxWidth="100vw"
-            padding="60px 30px"
+            sx={{
+              alignItems: "center",
+              justifyContent: "center",
+              display: "flex",
+              flexDirection: "column",
+              margin: "auto",
+              maxWidth: "100vw",
+              padding: "60px 30px",
+            }}
           >
-            <Typography marginBottom="0.25rem" marginTop="1rem" variant="h3">
+            <Typography
+              variant="h3"
+              sx={{
+                marginBottom: "0.25rem",
+                marginTop: "1rem",
+              }}
+            >
               Loading...
             </Typography>
             <CircularProgress />

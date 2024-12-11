@@ -11,11 +11,11 @@ declare module "@remix-run/node" {
 }
 
 export default defineConfig({
-  ...(process.env.NODE_ENV === "production" && {
-    ssr: {
-      noExternal: ["@mui/*"],
-    },
-  }),
+  // ...(process.env.NODE_ENV === "production" && {
+  ssr: {
+    noExternal: ["@mui/*"],
+  },
+  // }),
   plugins: [
     remixDevTools(),
     remix({

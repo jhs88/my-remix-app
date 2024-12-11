@@ -14,4 +14,3 @@ updates:
       - "dependabot"
     allow:
       - dependency-type: "all"
-      

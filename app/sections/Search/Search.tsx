@@ -13,7 +13,13 @@ export default function SearchForm() {
   const submit = useSubmit();
 
   return (
-    <Stack direction="row" alignItems="baseline" spacing={2}>
+    <Stack
+      direction="row"
+      spacing={2}
+      sx={{
+        alignItems: "baseline",
+      }}
+    >
       <Form
         id="search-form"
         onChange={(event) => {
@@ -22,7 +28,12 @@ export default function SearchForm() {
         }}
         role="search"
       >
-        <Stack alignItems="center" spacing={2}>
+        <Stack
+          spacing={2}
+          sx={{
+            alignItems: "center",
+          }}
+        >
           <SearchInput
             id="q"
             name="q"
