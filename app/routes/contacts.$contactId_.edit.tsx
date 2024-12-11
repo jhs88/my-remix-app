@@ -1,4 +1,4 @@
-import type { ActionFunctionArgs, LoaderFunctionArgs } from '@remix-run/node';
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Form, useLoaderData, useNavigate } from "@remix-run/react";
 import invariant from "tiny-invariant";
@@ -27,7 +27,13 @@ export default function EditContact() {
 
   return (
     <Form id="contact-form" method="post">
-      <Grid container p="2rem" spacing={2}>
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          p: "2rem",
+        }}
+      >
         <Grid item xs={12} md={6}>
           <InputLabel htmlFor="first">First Name</InputLabel>
           <TextField
@@ -105,7 +111,13 @@ export default function EditContact() {
           />
         </Grid>
       </Grid>
-      <Stack direction="row" justifyContent="end" spacing={2}>
+      <Stack
+        direction="row"
+        spacing={2}
+        sx={{
+          justifyContent: "end",
+        }}
+      >
         <Button onClick={() => navigate(-1)} type="button">
           Cancel
         </Button>

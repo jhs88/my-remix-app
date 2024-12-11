@@ -27,16 +27,31 @@ export default function Contact() {
   const { contact } = useLoaderData<typeof loader>();
 
   return (
-    <Stack id="contact" p="1rem" justifyContent="center" alignItems="center">
+    <Stack
+      id="contact"
+      sx={{
+        p: "1rem",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Box
         component="img"
         alt={`${contact.first} ${contact.last} avatar`}
         key={contact.avatar}
         src={contact.avatar}
-        width="50%"
-        borderRadius="50%"
+        sx={{
+          width: "50%",
+          borderRadius: "50%",
+        }}
       />
-      <Stack direction="row" alignItems="center" spacing={4}>
+      <Stack
+        direction="row"
+        spacing={4}
+        sx={{
+          alignItems: "center",
+        }}
+      >
         <Typography variant="h3" gutterBottom>
           {contact.first || contact.last
             ? `${contact.first} ${contact.last}`
@@ -54,7 +69,13 @@ export default function Contact() {
         </Link>
       )}
       {contact.notes && <Typography gutterBottom>{contact.notes}</Typography>}
-      <Stack direction="row" mt="2rem" spacing={2}>
+      <Stack
+        direction="row"
+        spacing={2}
+        sx={{
+          mt: "2rem",
+        }}
+      >
         <Form action="edit">
           <Button variant="outlined" type="submit">
             Edit

@@ -7,7 +7,12 @@ import React from "react";
 export default function BackCard(props: BackCardComponentProps) {
   // const { t } = useTranslation();
   return (
-    <Stack ml="1rem" mt="1rem">
+    <Stack
+      sx={{
+        ml: "1rem",
+        mt: "1rem",
+      }}
+    >
       <Typography variant="h5">
         {/* {t("backHeader", { content: { ...props } })} */}
         Test
@@ -16,8 +21,7 @@ export default function BackCard(props: BackCardComponentProps) {
         {/* {t("subHeader", { ...props })} */}
         Test
       </Typography>
-      {/* {parse(description ?? "", options)} */}
-      Test2
+      {/* {parse(description ?? "", options)} */}Test2
       {props.children &&
         React.Children.map(props.children, (child) => (
           <Grid item>{child}</Grid>

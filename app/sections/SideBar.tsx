@@ -6,7 +6,12 @@ import Navbar from "./Navbar";
 
 export default function SideBar() {
   return (
-    <Box component="nav" justifyContent="center">
+    <Box
+      component="nav"
+      sx={{
+        justifyContent: "center",
+      }}
+    >
       <MuiLink component={Link} to="/">
         <Typography variant="h3" gutterBottom>
           Remix Contacts

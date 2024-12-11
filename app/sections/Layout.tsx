@@ -9,7 +9,15 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
         <Grid item xs={12} md={4}>
           <SideBar />
         </Grid>
-        <Grid item justifyContent="center" alignItems="center" xs={12} md={8}>
+        <Grid
+          item
+          xs={12}
+          md={8}
+          sx={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           {children}
         </Grid>
       </Grid>

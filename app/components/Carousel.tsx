@@ -72,13 +72,21 @@ export default function Carousel({ limit = 1, children }: CarouselProps) {
   );
 
   return (
-    <Stack direction="row" alignItems="stretch" justifyContent="space-between">
+    <Stack
+      direction="row"
+      sx={{
+        alignItems: "stretch",
+        justifyContent: "space-between",
+      }}
+    >
       <Previous />
       <Stack
         direction="row"
-        alignSelf="center"
-        alignItems="center"
         spacing={{ xs: 2, md: 8 }}
+        sx={{
+          alignSelf: "center",
+          alignItems: "center",
+        }}
       >
         {children &&
           Children.toArray(children)

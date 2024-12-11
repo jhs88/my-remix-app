@@ -268,12 +268,20 @@ interface ExpandMoreProps extends IconButtonProps {
 const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+})(({ theme }) => ({
+  transform: "rotate(180deg)",
   marginLeft: "auto",
   transition: theme.transitions.create("transform", {
     duration: theme.transitions.duration.shortest,
   }),
+  variants: [
+    {
+      props: ({ expand }) => !expand,
+      style: {
+        transform: "rotate(0deg)",
+      },
+    },
+  ],
 }));
 
 function RecipeReviewCard() {
@@ -302,7 +310,12 @@ function RecipeReviewCard() {
         alt="Paella dish"
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          sx={{
+            color: "text.secondary",
+          }}
+        >
           This impressive paella is a perfect party dish and a fun meal to cook
           together with your guests. Add 1 cup of frozen peas along with the
           mussels, if you like.
@@ -360,17 +373,25 @@ function RecipeReviewCard() {
 }
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: "center",
   color: theme.palette.text.secondary,
+  ...theme.applyStyles("dark", {
+    backgroundColor: "#1A2027",
+  }),
 }));
 
 export default function Mui() {
   return (
     <Container fixed>
-      <Typography variant="h2" textAlign="center">
+      <Typography
+        variant="h2"
+        sx={{
+          textAlign: "center",
+        }}
+      >
         Welcome to Remix &lt;&gt; Mui
       </Typography>
       <Stack spacing={2}>
